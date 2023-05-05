@@ -1,0 +1,31 @@
+### 解题思路
+
+就是经典的merge写法啦。。。
+
+### 代码
+
+* java
+
+```java
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int[] help = new int[m+n];
+        int p1 = 0;
+        int i = 0;
+        int p2 = 0;
+        while(p1 < m && p2 < n){
+            help[i++] = nums1[p1] <= nums2[p2] ? nums1[p1++] : nums2[p2++];
+        }
+        while(p1 < m){
+            help[i++] = nums1[p1++];
+        }
+        while(p2 < n){
+            help[i++] = nums2[p2++];
+        }
+        for(i = 0; i < m+n; i++){
+            nums1[i] = help[i];
+        }
+    }
+}
+```
+

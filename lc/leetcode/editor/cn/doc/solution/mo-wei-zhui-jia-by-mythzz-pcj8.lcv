@@ -1,0 +1,65 @@
+> Problem: [88. 合并两个有序数组](https://leetcode.cn/problems/merge-sorted-array/description/)
+
+[TOC]
+
+# 思路
+
+> 讲述看到这一题的思路
+
+# 解题方法
+
+> 描述你的解题方法
+
+# 复杂度
+
+- 时间复杂度:
+
+> 添加时间复杂度, 示例： $O(n)$
+
+- 空间复杂度:
+
+> 添加空间复杂度, 示例： $O(n)$
+
+# Code
+
+* []
+
+```Java
+
+class Solution {
+///       注意m是大于0的元素的个数
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+
+            # nums1 tail
+          int k = m+n-1;
+
+          int index1 = m-1;
+          int index2 = n-1;
+
+            // 遍历两个数组的大于0的元素 从末尾遍历起
+          while(index1 >=0 && index2 >= 0){
+              if(nums1[index1] >= nums2[index2]){
+                  nums1[k--] = nums1[index1--];
+              }else{
+                  nums1[k--] = nums2[index2--];
+              }
+          }
+        
+            // 看哪个数组的元素还有剩  追加的num1
+
+          while(index1 >= 0){
+              nums1[k--] = nums1[index1--];
+          }
+           while(index2 >= 0){
+              nums1[k--] = nums2[index2--];
+          }
+
+          
+
+
+
+
+    }
+}
+```
+

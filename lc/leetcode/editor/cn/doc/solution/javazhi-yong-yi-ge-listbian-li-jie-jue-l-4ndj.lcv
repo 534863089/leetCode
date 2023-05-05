@@ -1,0 +1,47 @@
+### 解题思路
+
+首先判断根节点是否为空，为空直接返回
+根节点加入list,初始下标i=0。每次从list中取出i对应的结点，如果此节点不为空且左/右子节点不为空，加入左/右子节点，循环条件为i<list长度，当i超过长度时，说明没有需要遍历的节点了，结束输出。
+
+### java list转int[] Lambda表达式
+
+* java
+
+```java
+list.stream().map(n->n.val).mapToInt(Integer::intValue).toArray()
+```
+
+### 代码
+
+* java
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int[] levelOrder(TreeNode root) {
+        if(root==null) return new int[0];
+        List<TreeNode> list=new ArrayList<>();
+        list.add(root);
+        int i=0;
+        while(i<list.size()){
+            TreeNode r=list.get(i++);
+            if(r!=null){
+                if(r.left!=null)
+                    list.add(r.left);
+                if(r.right!=null)
+                    list.add(r.right);
+            }
+        }
+        return list.stream().map(n->n.val).mapToInt(Integer::intValue).toArray();
+    }
+}
+```
+

@@ -1,0 +1,16 @@
+* 
+
+```
+    public boolean isAnagram(String s, String t) {
+        return Arrays.hashCode(countChars(s)) == Arrays.hashCode(countChars(t));
+    }
+
+    public static int[] countChars(String s) {
+        int[] charCounts = new int[26];
+        for (char c : s.toCharArray()) {
+            charCounts[c - 'a']++;
+        }
+        return charCounts;
+    }
+```
+

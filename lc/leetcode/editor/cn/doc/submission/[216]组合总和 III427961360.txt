@@ -1,0 +1,64 @@
+class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        ArrayList<List<Integer>> result = new ArrayList<>();
+        int min = 0;
+        int max = 0;
+        int[] ints = new int[k];
+        for (int i = 0; i < k; i++) {
+            min += i + 1;
+            max += 9 - i;
+            ints[i] = i + 1;
+        }
+        if (min > n) {
+            return result;
+        }
+        if (max < n) {
+            return result;
+        }
+
+        while (ints[0] < 10 - k) {
+            loop(n, result, ints);
+            for (int i = 1; i <= k + 1; i++) {
+                if (ints[k - i] < 10 - i) {
+                    ints[k - i] += 1;
+                    int plus = 1;
+                    for (int j = i - 1 ; j > 0; j--) {
+                        ints[k - j] = ints[k - i] + plus++;
+                    }
+                    break;
+                }
+            }
+        }
+
+        // loop(n, result, ints);
+
+        return result;
+
+    }
+
+    private static void loop(int n, ArrayList<List<Integer>> result, int[] ints) {
+        int val = 0;
+        for (int i = ints.length - 1; i >= 0; i--) {
+            val += ints[i];
+            if (val > n) {
+                break;
+            }
+        }
+        if (val == n) {
+            ArrayList<Integer> list = new ArrayList<>();
+            for (int i = 0; i < ints.length; i++) {
+                list.add(ints[i]);
+            }
+            result.add(list);
+        }
+    }
+}
+
+//total_testcases:18
+//total_correct:17
+//input_formatted:9
+45
+//expected_output:[[1,2,3,4,5,6,7,8,9]]
+//code_output:[]
+//last_testcase:9
+45

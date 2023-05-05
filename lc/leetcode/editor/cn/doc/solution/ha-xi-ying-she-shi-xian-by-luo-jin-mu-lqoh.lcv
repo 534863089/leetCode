@@ -1,0 +1,24 @@
+* cpp
+
+```cpp
+class Solution {
+public:
+    vector<string> sortPeople(vector<string>& names, vector<int>& heights) {
+        //哈希映射
+        int n=names.size();
+        unordered_map<int,string> map;
+        //对应关系存入
+        for(int i=0;i<n;i++){
+            map[heights[i]]=names[i];
+        }
+        //身高降序排列
+        sort(heights.begin(),heights.end(),greater());
+        //取出对应姓名
+        for(int i=0;i<n;i++){
+            names[i]=map[heights[i]];
+        }
+        return names;
+    }
+};
+```
+

@@ -1,0 +1,23 @@
+![捕获.JPG](https://pic.leetcode-cn.com/1620560358-aZfamM-%E6%8D%95%E8%8E%B7.JPG)
+
+* java
+
+```java
+class Solution {
+    public void reverseString(char[] s) {
+        int m = s.length;
+        int left = 0, right = m - 1;
+        while (left < right) {
+//            char temp = s[left];
+//            s[left] = s[right];
+//            s[right] = temp;
+            s[left] ^= s[right];
+            s[right] ^= s[left];
+            s[left] ^= s[right];
+            left++;
+            right--;
+        }
+    }
+}
+```
+

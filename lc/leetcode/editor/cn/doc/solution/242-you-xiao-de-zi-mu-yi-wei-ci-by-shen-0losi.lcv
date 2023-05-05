@@ -1,0 +1,100 @@
+> Problem: [242. 有效的字母异位词](https://leetcode.cn/problems/valid-anagram/description/)
+
+[TOC]
+
+# 思路：
+
+**方法一：排序**
+
+`t` 是` s` 的异位词等价于「两个字符串排序后相等」。
+- 因此我们可以对字符串 `s` 和 `t` 分别排序，看排序后的字符串是否相等即可判断。
+- 此外，如果 `s` 和 `t` 的长度不同，`t`必然不是 `s` 的异位词。
+
+**方法二：哈希映射**
+1. 首先判断两个字符串长度是否相等，不相等则直接返回 `false`；
+2. 若相等，则初始化 26 个字母哈希表；
+3. 遍历 `s` , 在对应位置增加；
+4. 再遍历 `t` 负责在对应位置减少，如果有一个哈希表的值都为 `0`，则返回`false`；
+5. 都遍历完没有返回`false`，则为有效的字母异位词，返回`true`。
+
+# Code
+
+**方法一：排序**
+
+* []
+
+```Java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length() != t.length()) return false;
+        char[] str1 = s.toCharArray();
+        char[] str2 = t.toCharArray();
+        Arrays.sort(str1);
+        Arrays.sort(str2);
+        return Arrays.equals(str1, str2);
+    }
+}
+```
+
+* []
+
+```C++
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if(s.size() != t.size()) return false;
+        sort(s.begin(), s.end());
+        sort(t.begin(), t.end());
+        return s == t;
+    }
+};
+```
+
+**方法二：哈希映射**
+
+* []
+
+```Java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length() != t.length()) return false;
+        int[] chars = new int[26];
+        for(char c : s.toCharArray()){
+            chars[c - 'a']++;
+        }
+        for(char c : t.toCharArray()){
+            if(--chars[c - 'a'] < 0) return false;
+        }
+        return true;
+    }
+}
+```
+
+* []
+
+```C++
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if(s.size() != t.size()) return false;
+        vector<int> chars(26, 0);
+        for(char c : s){
+            chars[c - 'a']++;
+        }
+        for(char c : t){
+            if(--chars[c - 'a'] < 0)  return false;
+        }
+        return true;
+    }
+};
+```
+
+# 复杂度分析：
+
+- **时间复杂度**：$O(n)$，其中 `n` 为`s`的长度；排序为：$O(nlog⁡n)$。
+- **空间复杂度**：$O(S)$，其中 `S` 为字符集大小，此处 `S = 26`；排序为：$O(log⁡n)$。
+
+> 放弃一件事很容易，每天能坚持一件事一定很酷，一起每日一题吧！
+
+**关注我 [leetCode专栏](http://t.csdn.cn/kQLJO)，每日更新！**
+

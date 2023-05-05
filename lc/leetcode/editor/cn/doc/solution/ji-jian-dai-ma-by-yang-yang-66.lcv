@@ -1,0 +1,24 @@
+### 解题思路
+
+博采众长优化的代码
+
+### 代码
+
+* csharp
+
+```csharp
+public class Solution {
+    public bool IsAnagram(string s, string t) {
+            if (s.Length != t.Length) return false;
+            int[] S = new int[26];
+            for (int i = 0; i < s.Length; i++){
+                S[s[i] - 'a']++;
+                S[t[i] - 'a']--;
+            }
+            for (int i = 0; i < 26; i++)
+                if (S[i] != 0) return false;
+            return true;
+    }
+}
+```
+

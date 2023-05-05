@@ -1,0 +1,19 @@
+### 解题思路
+
+将数组二nums2的数值传入nums1中，再给数组nums1排序
+
+### 代码
+
+* java
+
+```java
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        for (int i = m; i < m + n; i++) {
+            nums1[i] = nums2[i - m];
+        }
+        Arrays.sort(nums1);
+    }
+}
+```
+

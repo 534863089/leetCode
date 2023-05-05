@@ -1,0 +1,128 @@
+**一、直接计算： 最笨的方式，用两个Map分别存在每个char的出现次数，最后比较两个map中元素次数是否相等。**
+
+* 
+
+```
+class Solution {
+    public boolean isAnagram(String s, String t) {
+         if(s == null||t == null) return false;
+         if(s.length() != t.length()) return false;
+         HashMap<Character,Integer> mapS = new HashMap<>();
+         HashMap<Character,Integer> mapT = new HashMap<>();
+         for(char i:s.toCharArray()){
+             if(mapS.containsKey(i)){
+                 int value = mapS.get(i);
+                 mapS.put(i,++value);
+             }else{
+               mapS.put(i,1);
+             }
+         }
+         for(char i:t.toCharArray()){
+             if(mapT.containsKey(i)){
+                 int value = mapT.get(i);
+                 mapT.put(i,++value);
+            }else{
+               mapT.put(i,1);
+             }
+         }
+         if(mapS.size() != mapT.size()) return false;
+          for(Map.Entry<Character,Integer> entry:mapS.entrySet()){
+              char key = entry.getKey();
+              int value = entry.getValue();
+              if(!mapT.containsKey(key)){
+                  return false;
+              }
+              if(value != mapT.get(key)){
+                  return false;
+              }
+          }
+        return true;
+
+    }
+}
+```
+
+**二、直接排序源字符串：最后比较字符串是否相等**
+
+* 
+
+```
+class Solution {
+    public boolean isAnagram(String s, String t) {
+         if(s == null||t == null) return false;
+         if(s.length() != t.length()) return false;
+         char[] ss=s.toCharArray();
+         char[] tt=t.toCharArray();
+         Arrays.sort(ss);
+         Arrays.sort(tt);
+        return Arrays.toString(ss).equals(Arrays.toString(tt));
+
+    }
+}
+```
+
+**三、针对字符串S用一个map存储元素，针对T字符串看其中有没有**
+
+* 
+
+```
+class Solution {
+   public boolean isAnagram(String s, String t) {
+         if(s == null||t == null) return false;
+         if(s.length() != t.length()) return false;
+         HashMap<Character,Integer> map = new HashMap<>();
+         for(char i:s.toCharArray()){
+             if(map.containsKey(i)){
+                 int value = map.get(i);
+                 map.put(i,++value);
+             }else{
+               map.put(i,1);
+             }
+         }
+         for(char i:t.toCharArray()){
+             if(map.containsKey(i)){
+                 int value = map.get(i);
+                 map.put(i,--value);
+                 if(value<0){
+                     return false;
+                 }
+            }else{
+               return false;
+             }
+         }
+        return true;
+
+    }
+}
+```
+
+**四、题中提到全部都是小写字符串，那么可以用数组来处理**
+
+* 
+
+```
+class Solution {
+   public boolean isAnagram(String s, String t) {
+         if(s == null||t == null) return false;
+         if(s.length() != t.length()) return false;
+         int[] nums = new int[26];
+         int countS = s.length();
+         int countT = t.length();
+         for(int i = 0;i < countS;i++){
+             int index = s.charAt(i)-'a';
+             ++nums[index];
+         }
+         for(int i = 0;i < countT;i++){
+             int index = t.charAt(i)-'a';
+              --nums[index];
+             if(nums[index] < 0){
+                 return false;
+             }
+         }
+    
+        return true;
+
+    }
+}
+```
+
